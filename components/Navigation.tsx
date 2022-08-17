@@ -37,7 +37,7 @@ export default function Navigation(props: any) {
                 {
                     workspaces.map((workspace, index) => {
                         return (
-                            <button className='w-full h-fit mb-4 flex items-center justify-center'>
+                            <button className='w-full h-fit mb-4 flex items-center justify-center' key={workspace.workspaceName}>
                                 <div className='w-12 h-12 bg-white rounded-md shadow-md'></div>
                                 {
                                     toggled

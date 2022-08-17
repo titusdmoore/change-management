@@ -6,7 +6,7 @@
     "start": "next start",
     "test": "jest --watch",
     "test:all": "jest --watchAll",
-    "test:ci": "jest -o"
+    "test:ci": "jest"
   },
   "dependencies": {
     "next": "latest",

@@ -2,12 +2,13 @@ import type { NextPage } from 'next';
 import SideNavigation from '../components/SideNavigation';
 import { useState } from 'react';
 import MainNavigation from '../components/MainNavigation';
+import ProjectWorkArea from '../components/ProjectWorkArea';
 
 const Home: NextPage = () => {
   const [activeWorkspace, setActiveWorkspace] = useState(1);
 
   const getActiveWorkspace = (workspaceId: number, workspaces: any[]): any | null => {
-    return data.workspaces.find(e => e.id === workspaceId);
+    return workspaces.find(e => e.id === workspaceId);
   }
 
   const data = {
@@ -60,7 +61,10 @@ const Home: NextPage = () => {
           ? getActiveWorkspace(activeWorkspace, data.workspaces).projects
           : {}
       } />
-      <MainNavigation />
+      <div className='w-full h-screen overflow-hidden'>
+        <MainNavigation workspace={getActiveWorkspace(activeWorkspace, data.workspaces)} />
+        <ProjectWorkArea />
+      </div>
     </main>
   );
 }

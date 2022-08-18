@@ -15,7 +15,7 @@ module.exports = {
           dark: '#1a41cb',
         },
         header: '#ffffff',
-        background: '#090b11',
+        background: '#f4f4f4',
         body: '#aeb0b6',
         secondary: {
           DEFAULT: '#1a1e28',

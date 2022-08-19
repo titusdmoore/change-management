@@ -5,7 +5,8 @@ import MainNavigation from '../components/MainNavigation';
 import ProjectWorkArea from '../components/ProjectWorkArea';
 
 const Home: NextPage = () => {
-  const [activeWorkspace, setActiveWorkspace] = useState(1);
+  const [ activeWorkspace, setActiveWorkspace ] = useState(1);
+  const [ sideNavToggled, setSideNavToggled ] = useState(false);
 
   const getActiveWorkspace = (workspaceId: number, workspaces: any[]): any | null => {
     return workspaces.find(e => e.id === workspaceId);
@@ -60,10 +61,13 @@ const Home: NextPage = () => {
         getActiveWorkspace(activeWorkspace, data.workspaces).projects
           ? getActiveWorkspace(activeWorkspace, data.workspaces).projects
           : {}
-      } />
+      } 
+      toggled={ sideNavToggled }
+      toggledHandler={ setSideNavToggled }
+      />
       <div className='w-full h-screen overflow-hidden'>
         <MainNavigation workspace={getActiveWorkspace(activeWorkspace, data.workspaces)} />
-        <ProjectWorkArea />
+        <ProjectWorkArea sideNavShouldShrink={sideNavToggled} />
       </div>
     </main>
   );

@@ -5,8 +5,7 @@ import MainNavigation from '../components/MainNavigation';
 import ProjectWorkArea from '../components/ProjectWorkArea';
 
 const Home: NextPage = () => {
-  const [ activeWorkspace, setActiveWorkspace ] = useState(1);
-  const [ sideNavToggled, setSideNavToggled ] = useState(false);
+  const [activeWorkspace, setActiveWorkspace] = useState(1);
 
   const getActiveWorkspace = (workspaceId: number, workspaces: any[]): any | null => {
     return workspaces.find(e => e.id === workspaceId);
@@ -18,22 +17,44 @@ const Home: NextPage = () => {
         "id": 1,
         "name": "Edge Webware",
         "description": "This is a description",
-        "projects": [
+        "clients": [
           {
-            "projectId": 12,
-            "projectName": "Wanted Rewards"
+            "clientId": 1,
+            "name": "Billy",
+            "projects": [
+              {
+                "projectId": 12,
+                "projectName": "Wanted Rewards"
+              },
+              {
+                "projectId": 13,
+                "projectName": "Carbide"
+              },
+            ]
           },
           {
-            "projectId": 13,
-            "projectName": "Carbide"
+            "clientId": 5,
+            "name": "McAffee",
+            "projects": [
+              {
+                "projectId": 15,
+                "projectName": "Kable Product Solutions"
+              },
+              {
+                "projectId": 16,
+                "projectName": "Light'n Up"
+              }
+            ]
           },
           {
-            "projectId": 15,
-            "projectName": "Kable Product Solutions"
-          },
-          {
-            "projectId": 16,
-            "projectName": "Light'n Up"
+            "clientId": 9,
+            "name": "Internal Projects",
+            "projects": [
+              {
+                "projectId": 66,
+                "projectName": "Change Management"
+              }
+            ]
           }
         ]
       },
@@ -41,15 +62,31 @@ const Home: NextPage = () => {
         "id": 2,
         "name": "U! Creative",
         "description": "This is a a text description",
-        "projects": [
+        "clients": [
           {
-            "projectId": 14,
-            "projectName": "MarFlex Supplies"
+            "clientId": 32,
+            "name": "Hampton Fitness",
+            "projects": [
+              {
+                "projectId": 17,
+                "projectName": "McAir"
+              },
+            ]
           },
           {
-            "projectId": 17,
-            "projectName": "McAir"
-          },
+            "clientId": 12,
+            "name": "Breat Oakley",
+            "projects": [
+              {
+                "projectId": 14,
+                "projectName": "MarFlex Supplies"
+              },
+              {
+                "projectId": 19,
+                "projectName": "MarFlex Construction"
+              },
+            ]
+          }
         ]
       }
     ]
@@ -57,17 +94,10 @@ const Home: NextPage = () => {
 
   return (
     <main className='flex flex-row'>
-      <SideNavigation projects={
-        getActiveWorkspace(activeWorkspace, data.workspaces).projects
-          ? getActiveWorkspace(activeWorkspace, data.workspaces).projects
-          : {}
-      } 
-      toggled={ sideNavToggled }
-      toggledHandler={ setSideNavToggled }
-      />
+      <SideNavigation workspaces={data.workspaces} setActiveWorkspace={setActiveWorkspace} />
       <div className='w-full h-screen overflow-hidden'>
         <MainNavigation workspace={getActiveWorkspace(activeWorkspace, data.workspaces)} />
-        <ProjectWorkArea sideNavShouldShrink={sideNavToggled} />
+        <ProjectWorkArea />
       </div>
     </main>
   );

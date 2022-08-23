@@ -1,34 +1,28 @@
-import { FaUserCircle } from 'react-icons/fa';
-import { BsBoxArrowRight } from 'react-icons/bs';
+import ELogo from '../public/E_WHITE.png';
+import Image from 'next/image';
 
 export default function SideNavigation(props: any) {
-    const projects: any[] = props.projects;
-    const toggled: boolean = props.toggled;
-    const toggledHandler: any = props.toggledHandler;
+    const workspaces: any[] = props.workspaces;
+    const setActiveWorkspace = props.setActiveWorkspace;
 
     return (
-        <aside className={`bg-primary h-screen ${toggled ? "w-72" : "w-16"}`}>
+        <aside className="bg-primary h-screen w-16">
             <button className='w-full h-16 bg-primary-dark flex justify-center items-center child:hover:text-body'>
-                <FaUserCircle className='text-header text-3xl' />
+                <Image
+                  src={ELogo}
+                />
             </button>
             <div className="w-full flex flex-col items-center pt-4">
                 {
-                    projects.map((project, index) => {
+                    workspaces.map((workspace, index) => {
+                      console.log(workspace.id)
                         return (
-                            <button className={`w-full h-fit mb-4 flex items-center ${toggled ? 'px-8' : 'px-2'}`} key={project.projectName}>
+                            <button className='w-full h-fit mb-4 flex items-center px-2' key={workspace.name} onClick={setActiveWorkspace(workspace.id)}>
                                 <div className='w-12 min-w-[3rem] h-12 bg-white rounded-md shadow-md'></div>
-                                <span className={`text-header ml-4 text-left ${toggled ? "inline-block" : "hidden"}`}>{project.projectName}</span>
                             </button>
                         );
                     })
                 }
-                <div>
-                    <button className='bg-white px-4 py-1 rounded shadow-md' onClick={() => {
-                        toggledHandler(!toggled);
-                    }}>
-                        <BsBoxArrowRight className='text-primary' />
-                    </button>
-                </div>
             </div>
         </aside>
     );

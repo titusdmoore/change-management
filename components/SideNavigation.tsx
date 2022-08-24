@@ -15,9 +15,10 @@ export default function SideNavigation(props: any) {
             <div className="w-full flex flex-col items-center pt-4">
                 {
                     workspaces.map((workspace, index) => {
-                      console.log(workspace.id)
                         return (
-                            <button className='w-full h-fit mb-4 flex items-center px-2' key={workspace.name} onClick={setActiveWorkspace(workspace.id)}>
+                            <button className='w-full h-fit mb-4 flex items-center px-2' key={workspace.name} onClick={() => {
+                                setActiveWorkspace(workspace.id)
+                            }}>
                                 <div className='w-12 min-w-[3rem] h-12 bg-white rounded-md shadow-md'></div>
                             </button>
                         );

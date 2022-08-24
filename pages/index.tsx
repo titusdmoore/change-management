@@ -97,7 +97,7 @@ const Home: NextPage = () => {
       <SideNavigation workspaces={data.workspaces} setActiveWorkspace={setActiveWorkspace} />
       <div className='w-full h-screen overflow-hidden'>
         <MainNavigation workspace={getActiveWorkspace(activeWorkspace, data.workspaces)} />
-        <ProjectWorkArea />
+        <ProjectWorkArea workspace={getActiveWorkspace(activeWorkspace, data.workspaces)} />
       </div>
     </main>
   );

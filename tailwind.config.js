@@ -13,6 +13,7 @@ module.exports = {
           DEFAULT: '#2e55df',
           light: '#5075fa',
           dark: '#1a41cb',
+          active: 'rgba(46, 85, 223, .25)',
         },
         header: '#ffffff',
         background: '#f4f4f4',

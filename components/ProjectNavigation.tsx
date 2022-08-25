@@ -9,7 +9,7 @@ export default function ProjectNavigation(props: any) {
   return (
     <div className="h-full bg-white w-56 p-4">
       <ul>
-        <button className="w-full text-left p-4 px-2">
+        <button className="w-full text-left p-4 px-2 mb-2">
           <span className="text-black text-lg">Dashboard</span>
         </button>
         {
@@ -17,13 +17,13 @@ export default function ProjectNavigation(props: any) {
             let open = activeClients.includes(index) ? true : false;
             
             return (
-              <Disclosure as="li" key={`client-${index}`}>
+              <Disclosure as="li" key={`client-${index}`} className="mb-2">
                 {({ open }) => (
                   <>
-                    <Disclosure.Button className="w-full text-left p-2 hover:bg-primary-active child:hover:text-primary rounded-t-lg">
+                    <Disclosure.Button className={`w-full text-left p-2 hover:bg-primary-active child:hover:text-primary rounded-t-lg ${open ? "bg-primary child:text-header" : "rounded-b-lg"}`}>
                       <span className="text-black text-lg">{client.name}</span>
                     </Disclosure.Button>
-                    <Disclosure.Panel className="drop-shadow-md px-2">
+                    <Disclosure.Panel className="px-2 border-x-2 border-b-2 py-2 rounded-b-lg">
                       <ul>
                         {
                           client.projects.map((project: any, index: any) => {

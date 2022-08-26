@@ -4,7 +4,6 @@ interface Workspace {
   name: string,
   description: string,
   clients?: Client[],
-
 }
 
 interface User {

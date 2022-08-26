@@ -1,9 +1,9 @@
 import ELogo from '../public/E_WHITE.png';
 import Image from 'next/image';
+import { ReactElement, ReactNode } from 'react';
 
-export default function SideNavigation(props: any) {
-    const workspaces: any[] = props.workspaces;
-    const setActiveWorkspace = props.setActiveWorkspace;
+export default function SideNavigation(props: SideNavProps): ReactElement {
+    const { workspaces, setActiveWorkspace }: SideNavProps = props;
 
     return (
         <aside className="bg-primary h-screen w-16">

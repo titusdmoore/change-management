@@ -5,13 +5,18 @@ import MainNavigation from '../components/MainNavigation';
 import ProjectWorkArea from '../components/ProjectWorkArea';
 
 const Home: NextPage = () => {
-  const [activeWorkspace, setActiveWorkspace] = useState(1);
+  const [activeWorkspace, setActiveWorkspace] = useState<number>(1);
 
-  const getActiveWorkspace = (workspaceId: number, workspaces: any[]): any | null => {
+  const getActiveWorkspace = (workspaceId: number, workspaces: Workspace[]): any | null => {
     return workspaces.find(e => e.id === workspaceId);
   }
 
-  const data = {
+  const data: { user: User, workspaces: Workspace[] } = {
+    "user": {
+      "id": 8,
+      "roles": [ 0, 3, 4 ],
+      "name": "Titus Moore"
+    },
     "workspaces": [
       {
         "id": 1,
@@ -101,6 +106,6 @@ const Home: NextPage = () => {
       </div>
     </main>
   );
-}
+};
 
-export default Home
+export default Home;

@@ -3,13 +3,20 @@ import { useState } from "react";
 import { BsNutFill } from "react-icons/bs";
 
 export default function ProjectNavigation(props: any) {
-  const clients = props.clients;
-  const [activeClients, setActiveClients] = useState<number[]>([]);
+  const { 
+    clients, 
+    activeProject, 
+    setActiveProject, 
+    dashboardIndex 
+  }: { clients: Client[], activeProject: number, setActiveProject: (newValue: number | null) => void, dashboardIndex: number } = props;
+  const [ activeClients, setActiveClients ] = useState<number[]>([]);
 
   return (
     <div className="h-full bg-white w-56 p-4">
       <ul>
-        <button className="w-full text-left p-4 px-2 mb-2">
+        <button className={`w-full text-left p-2 hover:bg-primary-active mb-2 child:hover:text-primary rounded-lg ${activeProject === dashboardIndex ? "bg-primary child:text-header" : ""}`} onClick={() => {
+          setActiveProject(dashboardIndex);
+        }}>
           <span className="text-black text-lg">Dashboard</span>
         </button>
         {
@@ -28,7 +35,7 @@ export default function ProjectNavigation(props: any) {
                         {
                           client.projects.map((project: any, index: any) => {
                             return (
-                              <li className="text-body" key={`project-${index}`}>{project.projectName}</li>
+                              <li className="text-black" key={`project-${index}`}>{project.projectName}</li>
                             );
                           })
                         }

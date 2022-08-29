@@ -12,7 +12,7 @@ export default function ProjectNavigation(props: any) {
   const [ activeClients, setActiveClients ] = useState<number[]>([]);
 
   return (
-    <div className="h-full bg-white w-56 p-4">
+    <div className="h-full bg-white w-60 p-4">
       <ul>
         <button className={`w-full text-left p-2 hover:bg-primary-active mb-2 child:hover:text-primary rounded-lg ${activeProject === dashboardIndex ? "bg-primary child:text-header" : ""}`} onClick={() => {
           setActiveProject(dashboardIndex);

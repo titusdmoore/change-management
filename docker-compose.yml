@@ -1,0 +1,29 @@
+version: '3'
+ 
+services:
+  db:
+    image: mysql:latest
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: dsg2%2sdf2%e33i
+      MYSQL_DATABASE: change_management_db
+      MYSQL_USER: change_management
+      MYSQL_PASSWORD: th1s5g2sdfvt3&233
+    ports:
+      - "6033:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 9191:80
+volumes:
+  dbdata:

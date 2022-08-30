@@ -10,6 +10,7 @@ export default function SideNavigation(props: SideNavProps): ReactElement {
             <button className='w-full h-16 bg-primary-dark flex justify-center items-center child:hover:text-body'>
                 <Image
                   src={ELogo}
+                  alt="Edge Webware Logo"
                 />
             </button>
             <div className="w-full flex flex-col items-center pt-4">

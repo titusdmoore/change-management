@@ -3,12 +3,11 @@ import SideNavigation from '../components/SideNavigation';
 import { useState } from 'react';
 import MainNavigation from '../components/MainNavigation';
 import ProjectWorkArea from '../components/ProjectWorkArea';
-import excuteQuery, { parseDataResponse, getWorkspace } from '../utils/db';
+import excuteQuery, { parseDataResponse, getWorkspaces } from '../utils/db';
 
 const Home: NextPage = (props: any) => {
-  const [activeWorkspace, setActiveWorkspace] = useState<number>(1);
-  console.log(props.workspace);
-  console.log("Here");
+  const [activeWorkspace, setActiveWorkspace] = useState<number>(1);  
+  console.log(props.workspaces[0].clients);
   
 
   const getActiveWorkspace = (workspaceId: number, workspaces: Workspace[]): any | null => {
@@ -113,13 +112,11 @@ const Home: NextPage = (props: any) => {
 };
 
 export async function getServerSideProps(context: any) {
-  const data = await excuteQuery("SELECT * FROM user");
-  const workspace = getWorkspace(1);
+  const workspaces = await getWorkspaces();
 
   return {
     props: {
-      dbData: parseDataResponse(data),
-      workspace: parseDataResponse(workspace)
+      workspaces: parseDataResponse(workspaces)
     }
   }
 }

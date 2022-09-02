@@ -6,8 +6,8 @@ import ProjectWorkArea from '../components/ProjectWorkArea';
 import excuteQuery, { parseDataResponse, getWorkspaces } from '../utils/db';
 
 const Home: NextPage = (props: any) => {
-  const [activeWorkspace, setActiveWorkspace] = useState<number>(1);  
-  console.log(props.workspaces[0].clients);
+  const [activeWorkspace, setActiveWorkspace] = useState<number>(1); 
+  const { workspaces }: { workspaces: Workspace[] } = props;
   
 
   const getActiveWorkspace = (workspaceId: number, workspaces: Workspace[]): any | null => {
@@ -102,10 +102,10 @@ const Home: NextPage = (props: any) => {
 
   return (
     <main className='flex flex-row'>
-      <SideNavigation workspaces={data.workspaces} setActiveWorkspace={setActiveWorkspace} />
+      <SideNavigation workspaces={workspaces} setActiveWorkspace={setActiveWorkspace} />
       <div className='w-full h-screen overflow-hidden'>
-        <MainNavigation workspace={getActiveWorkspace(activeWorkspace, data.workspaces)} />
-        <ProjectWorkArea workspace={getActiveWorkspace(activeWorkspace, data.workspaces)} />
+        <MainNavigation workspace={getActiveWorkspace(activeWorkspace, workspaces)} />
+        <ProjectWorkArea workspace={getActiveWorkspace(activeWorkspace, workspaces)} />
       </div>
     </main>
   );

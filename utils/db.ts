@@ -59,7 +59,7 @@ export async function getClientsByWorkspaceId( workspaceId: number ) {
 }
 
 export async function populateClient( client: any ) {
-  let projects = getProjectsByClientId ( client.id );
+  let projects = await getProjectsByClientId ( client.id );
 
   if ( projects ) {
     return {
@@ -84,7 +84,7 @@ export async function getProjectsByClientId( clientId: number ) {
 
 
 export async function populateProject( project: any ) {
-  let tasks = getTasksByProjectId( project.id );
+  let tasks = await getTasksByProjectId( project.id );
   
   if ( tasks ) {
     return {

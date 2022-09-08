@@ -1,9 +1,11 @@
 // Enums
 enum Status {
+  Progress = 1,
   Queue,
-  Progress,
-  Cancelled,
+  Approved,
   Completed,
+  WaitingApproval,
+  Cancelled
 }
 
 enum Role {

@@ -11,7 +11,7 @@ const db = mysql({
 });
 
 // export async function getWorkspace(id: number) {
-//   let workspaces = parseDataResponse(await excuteQuery(
+//   let workspaces = parseDataResponse(await executeQuery(
 //     "SELECT w.id as 'workspaceId', w.name as 'name', p.id as 'projectId', p.name as 'projectName', p.description as 'projectDescription', s.name as 'projectStatus' FROM workspace as w INNER JOIN project as p ON p.workspaceId = w.id INNER JOIN status as s ON s.id = p.statusId WHERE w.id = ?;",
 //     [id]
 //   ));
@@ -29,7 +29,7 @@ const db = mysql({
 // }
 
 export async function getWorkspaces() {
-  let rawWorkspaces = parseDataResponse(await excuteQuery("SELECT * FROM workspace;"));
+  let rawWorkspaces = parseDataResponse(await executeQuery("SELECT * FROM workspace;"));
 
   return await Promise.all(rawWorkspaces.map( populateWorkspace ));
 }
@@ -49,7 +49,7 @@ export async function populateWorkspace( workspace: any ) {
 
 export async function getClientsByWorkspaceId( workspaceId: number ) {
   let rawClients = parseDataResponse(
-    await excuteQuery(
+    await executeQuery(
       "SELECT * FROM client WHERE client.workspaceId = ?;",
       [ workspaceId ]
     )
@@ -73,7 +73,7 @@ export async function populateClient( client: any ) {
 
 export async function getProjectsByClientId( clientId: number ) {
   let rawProjects = parseDataResponse( 
-    await excuteQuery(
+    await executeQuery(
       "SELECT * FROM project WHERE project.clientId = ?",
       [ clientId ]
     )
@@ -96,8 +96,22 @@ export async function populateProject( project: any ) {
   }
 }
 
+export async function getTasksByStatus( status: number | string, limit?: number ) {
+  if ( typeof status === "string" ) {
+    return await executeQuery(
+      `SELECT t.* FROM task as t INNER JOIN status as s WHERE t.statusId = s.id AND s.name = ? ${limit ? "LIMIT ?": ""}`,
+      [ status, limit ]
+    );
+  } else {
+    return await executeQuery(
+      `SELECT * FROM task WHERE task.statusId = ? ${limit ? "LIMIT ?": ""}`,
+      [ status, limit ]
+    );
+  }
+}
+
 export async function getTasksByProjectId( projectId: number ) {
-  return await excuteQuery(
+  return await executeQuery(
     "SELECT t.* FROM projectTasks as pt INNER JOIN task AS t WHERE pt.projectId = ? AND t.id = pt.taskId;",
     [ projectId ]);
 }
@@ -111,7 +125,7 @@ export function parseDataResponse(data: any) {
   }
 }
 
-export default async function excuteQuery(query: any, values?: any[]) {
+export default async function executeQuery(query: any, values?: any[]) {
   try {
     const results = await db.query(query, values);
     await db.end();

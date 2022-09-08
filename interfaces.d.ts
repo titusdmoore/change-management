@@ -20,7 +20,7 @@ interface Client {
 
 interface Project {
   projectId: number,
-  projectName: string,
+  name: string,
   tasks?: Task[]
 }
 
